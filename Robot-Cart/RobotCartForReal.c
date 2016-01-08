@@ -16,13 +16,23 @@ task main()
 {
 	int sensorPressed = 1;
 	int sensorNotPressed = 0;
-	int liftSpeed = 63;
+	/* Minimum wheel speed. Must be in range [0..64] */
+	int minWheelSpeed = 16;
 
 	while(true)
 	{
 	  //pot range is 0 - 1023
 	  //motor range is -127 - 127
-	  int wheelSpeed = (63/1023) * SensorValue(speedCtrl);
+
+	  // Scale pot reading [0..1023] down to half the forward speed range [0..63]
+	  // by shifting right 4 bits. This is analogous to scaling decimal values [0..10000]
+	  // to [0..100] by simply crossing off the last two digits.
+	  int wheelSpeed = SensorValue(speedCtrl) >> 4;
+
+	  // Bump up speed to avoid having the cart not move at all at low settings
+	  // Don't add more than 64 so the max stays within the valid motor speed range 
+	  // wheelSpeed range is [0..63]+[0..64] = [0..127]
+	  wheelSpeed += minWheelSpeed;
 
 	  //right wheel
 		if(SensorValue(rightTrigger) == sensorPressed && SensorValue(rightRevTrigger) == sensorNotPressed)
@@ -51,7 +61,6 @@ task main()
 		{
 			motor[leftMotor] = 0;
 		}
-
 
 		//lifter
 		if(SensorValue(liftUp) == sensorPressed && SensorValue(liftTop) == sensorNotPressed)
