@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team2051.robot.subsystems;
 
 import org.usfirst.frc.team2051.robot.RobotMap;
@@ -11,6 +10,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -47,6 +47,10 @@ public class DriveSystem extends Subsystem
 		driveRightC = new CANTalon(RobotMap.DRIVE_RIGHT_C_CAN_ID);
 		LiveWindow.addActuator("Drive System", "Drive Right C", driveRightC);
 
+		//Accelerometer Tilt control
+		tiltCont = new BuiltInAccelerometer(Accelerometer.Range.k4G);
+		//LiveWindow.addSensor("Drive System", "Accel", tiltCont);
+
 		// On each side, all three drive motors MUST run at the same speed.
 		// Use the CAN Talon Follower mode to set the speed of B and C,
 		// making always run at the same speed as A.
@@ -58,9 +62,6 @@ public class DriveSystem extends Subsystem
 		driveLeftC.set(driveLeftA.getDeviceID());
 		driveRightB.set(driveRightA.getDeviceID());
 		driveRightC.set(driveRightA.getDeviceID());
-
-		//Accelerometer Tilt control
-		tiltCont = new BuiltInAccelerometer(Accelerometer.Range.k4G);
 
 		// Define a robot drive object in terms of only the A motors.
 		// The B and C motors will play along at the same speed (see above.)
@@ -87,6 +88,9 @@ public class DriveSystem extends Subsystem
 	public void takeJoystickInputs(Joystick joystk, Joystick joystk2) 
 	{
 		robotDrive.tankDrive(joystk, joystk2);
+		SmartDashboard.putNumber("accel.x", tiltCont.getX());
+		SmartDashboard.putNumber("accel.y", tiltCont.getY());
+		SmartDashboard.putNumber("accel.z", tiltCont.getZ());
 	}
 
 	public void forward() 
@@ -98,4 +102,26 @@ public class DriveSystem extends Subsystem
 	{
 		robotDrive.drive(/* speed */0, /* curve */0);
 	}
+	
+	public double xTilt(double x, double y, double z)
+	{
+		double result;
+		result=Math.sqrt(x);//y^2 + z^2
+		result=x/result;
+		double accel_angle_x = Math.atan(result);
+		return accel_angle_x;
+	}
+//	public int xTilt(, y, z)
+//	{
+//	   result=sqrt(y2+z2);
+//	   result=x_val/result;
+//	   accel_angle_x = atan(result);
+//	   return accel_angle_x;
+//	}
+//	
+//	
+//	   //Y Axis
+//	   result=sqrt(x2+z2);
+//	   result=y_val/result;
+//	   accel_angle_y = atan(result);
 }
