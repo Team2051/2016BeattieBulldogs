@@ -3,8 +3,6 @@ package org.usfirst.frc.team2051.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2051.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2051.robot.commands.DriveByJoystick;
 
 /**
@@ -40,6 +38,7 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public Joystick driveStick;
+	public Joystick driveStick2;
 
 	public OI() 
 	{
@@ -50,6 +49,11 @@ public class OI {
 	public Joystick getDriveStick() 
 	{
 		return driveStick;
+	}
+	
+	public Joystick getDriveStick2()
+	{
+		return driveStick2;
 	}
 
 }

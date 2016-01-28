@@ -84,14 +84,14 @@ public class DriveSystem extends Subsystem
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	public void takeJoystickInputs(Joystick joystk) 
+	public void takeJoystickInputs(Joystick joystk, Joystick joystk2) 
 	{
-		robotDrive.arcadeDrive(joystk);
+		robotDrive.tankDrive(joystk, joystk2);
 	}
 
 	public void forward() 
 	{
-		robotDrive.drive(1.0, 0);
+		robotDrive.drive(1, 1);
 	}
 
 	public void stop() 
@@ -99,4 +99,3 @@ public class DriveSystem extends Subsystem
 		robotDrive.drive(/* speed */0, /* curve */0);
 	}
 }
-
