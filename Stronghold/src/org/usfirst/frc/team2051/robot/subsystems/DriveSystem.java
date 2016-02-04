@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */    
 public class DriveSystem extends Subsystem 
-{
+{	
 	private CANTalon driveLeftA;
 	private CANTalon driveLeftB;
 	private CANTalon driveLeftC;
@@ -35,12 +35,10 @@ public class DriveSystem extends Subsystem
 
 	double encOffsetValue = 0;
 	
-	private double tiltAvg = 1;
-	
-	public double tiltArray[] = new double[25];
+	public double tiltArray[] = new double[24];
 	
 	public int i = 0;
-	public int maxArraySize = 25;
+	public int maxArraySize = 24;
 
 	public DriveSystem() 
 	{
@@ -102,6 +100,7 @@ public class DriveSystem extends Subsystem
 		SmartDashboard.putNumber("accel.x", tiltCont.getX());
 		SmartDashboard.putNumber("accel.y", tiltCont.getY());
 		SmartDashboard.putNumber("accel.z", tiltCont.getZ());
+		SmartDashboard.putNumber("avg.z", getTiltAvg());
 	}
 
 	public void forward(double speed) 
@@ -118,7 +117,7 @@ public class DriveSystem extends Subsystem
 	{
 		tiltArray[i]=tiltCont.getX();
 		i++;
-		if(i >= maxArraySize)
+		if(i > maxArraySize)
 		{
 			i=0;
 		}
@@ -126,17 +125,19 @@ public class DriveSystem extends Subsystem
 	
 	public double getTiltAvg()
 	{
+		tiltArrayPop();
 		double total = 0;
 		for(int q = 0; q <= maxArraySize; q++)
 		{
-		total = tiltArray[q] + total;
-		}
-		return total / maxArraySize;
+			total = tiltArray[q] + total;
+		}		
+		//total / 25
+		return total / (maxArraySize + 1);
 	}
 	
 	public boolean isTiltedOnRamp()
 	{
 		//returns g force
-		return getTiltAvg()>=.15;		
+		return getTiltAvg()>=.15;
 	}
 }
