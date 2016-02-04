@@ -3,7 +3,8 @@ package org.usfirst.frc.team2051.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team2051.robot.commands.DriveByJoystick;
+
+import org.usfirst.frc.team2051.robot.commands.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -43,7 +44,8 @@ public class OI {
 	public OI() 
 	{
 		driveStick = new Joystick(0);
-		SmartDashboard.putData("DriveByJoystick", new DriveByJoystick());
+		driveStick2 = new Joystick(1);
+		SmartDashboard.putData("AutoApproach", new AutoApproachDefenses());
 	}
 	
 	public Joystick getDriveStick() 

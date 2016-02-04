@@ -93,9 +93,9 @@ public class DriveSystem extends Subsystem
 		SmartDashboard.putNumber("accel.z", tiltCont.getZ());
 	}
 
-	public void forward() 
+	public void forward(double speed) 
 	{
-		robotDrive.drive(1, 1);
+		robotDrive.drive(speed, 0);
 	}
 
 	public void stop() 
@@ -110,6 +110,11 @@ public class DriveSystem extends Subsystem
 		result=x/result;
 		double accel_angle_x = Math.atan(result);
 		return accel_angle_x;
+	}
+	
+	public boolean isTiltedOnRamp()
+	{
+		return tiltCont.getX()>=.15;		
 	}
 //	public int xTilt(, y, z)
 //	{
