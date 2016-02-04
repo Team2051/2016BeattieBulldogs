@@ -1,5 +1,9 @@
 package org.usfirst.frc.team2051.robot.subsystems;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.usfirst.frc.team2051.robot.RobotMap;
 import org.usfirst.frc.team2051.robot.commands.DriveByJoystick;
 
@@ -30,6 +34,13 @@ public class DriveSystem extends Subsystem
 	private RobotDrive robotDrive;
 
 	double encOffsetValue = 0;
+	
+	private double tiltAvg = 1;
+	
+	public double tiltArray[] = new double[25];
+	
+	public int i = 0;
+	public int maxArraySize = 25;
 
 	public DriveSystem() 
 	{
@@ -103,30 +114,29 @@ public class DriveSystem extends Subsystem
 		robotDrive.drive(/* speed */0, /* curve */0);
 	}
 	
-	public double xTilt(double x, double y, double z)
+	public void tiltArrayPop()
 	{
-		double result;
-		result=Math.sqrt(x);//y^2 + z^2
-		result=x/result;
-		double accel_angle_x = Math.atan(result);
-		return accel_angle_x;
+		tiltArray[i]=tiltCont.getX();
+		i++;
+		if(i >= maxArraySize)
+		{
+			i=0;
+		}
+	}
+	
+	public double getTiltAvg()
+	{
+		double total = 0;
+		for(int q = 0; q <= maxArraySize; q++)
+		{
+		total = tiltArray[q] + total;
+		}
+		return total / maxArraySize;
 	}
 	
 	public boolean isTiltedOnRamp()
 	{
-		return tiltCont.getX()>=.15;		
+		//returns g force
+		return getTiltAvg()>=.15;		
 	}
-//	public int xTilt(, y, z)
-//	{
-//	   result=sqrt(y2+z2);
-//	   result=x_val/result;
-//	   accel_angle_x = atan(result);
-//	   return accel_angle_x;
-//	}
-//	
-//	
-//	   //Y Axis
-//	   result=sqrt(x2+z2);
-//	   result=y_val/result;
-//	   accel_angle_y = atan(result);
 }
