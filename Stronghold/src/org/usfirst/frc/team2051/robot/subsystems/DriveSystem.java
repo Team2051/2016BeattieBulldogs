@@ -34,11 +34,11 @@ public class DriveSystem extends Subsystem
 	private RobotDrive robotDrive;
 
 	double encOffsetValue = 0;
-	
-	public double tiltArray[] = new double[24];
+
+	int maxArrayIndex = 24;
+	public double tiltArray[] = new double[maxArrayIndex + 1];
 	
 	public int i = 0;
-	public int maxArraySize = 24;
 
 	public DriveSystem() 
 	{
@@ -100,7 +100,7 @@ public class DriveSystem extends Subsystem
 		SmartDashboard.putNumber("accel.x", tiltCont.getX());
 		SmartDashboard.putNumber("accel.y", tiltCont.getY());
 		SmartDashboard.putNumber("accel.z", tiltCont.getZ());
-		SmartDashboard.putNumber("avg.z", getTiltAvg());
+		SmartDashboard.putNumber("avg.x", getTiltAvg());
 	}
 
 	public void forward(double speed) 
@@ -117,7 +117,7 @@ public class DriveSystem extends Subsystem
 	{
 		tiltArray[i]=tiltCont.getX();
 		i++;
-		if(i > maxArraySize)
+		if(i > maxArrayIndex)
 		{
 			i=0;
 		}
@@ -127,17 +127,17 @@ public class DriveSystem extends Subsystem
 	{
 		tiltArrayPop();
 		double total = 0;
-		for(int q = 0; q <= maxArraySize; q++)
+		for(int q = 0; q <= maxArrayIndex; q++)
 		{
 			total = tiltArray[q] + total;
-		}		
+		}
 		//total / 25
-		return total / (maxArraySize + 1);
+		return total / (maxArrayIndex + 1);
 	}
 	
 	public boolean isTiltedOnRamp()
 	{
 		//returns g force
-		return getTiltAvg()>=.15;
+		return getTiltAvg() >= .15;
 	}
 }
