@@ -1,9 +1,5 @@
 package org.usfirst.frc.team2051.robot.subsystems;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.usfirst.frc.team2051.robot.RobotMap;
 import org.usfirst.frc.team2051.robot.commands.DriveByJoystick;
 
@@ -94,9 +90,9 @@ public class DriveSystem extends Subsystem
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	public void takeJoystickInputs(Joystick joystk, Joystick joystk2) 
+	public void takeJoystickInputs(Joystick joystk) 
 	{
-		robotDrive.tankDrive(joystk, joystk2);
+		robotDrive.arcadeDrive(joystk);
 		SmartDashboard.putNumber("accel.x", tiltCont.getX());
 		SmartDashboard.putNumber("accel.y", tiltCont.getY());
 		SmartDashboard.putNumber("accel.z", tiltCont.getZ());

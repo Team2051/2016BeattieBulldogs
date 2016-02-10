@@ -47,11 +47,11 @@ public class AutoApproachDefenses extends Command
     	else
     		return Robot.driveSystem.isTiltedOnRamp();
     }
-
+    
     // Called once after isFinished returns true
     protected void end() 
     {
-    	;
+    	Robot.driveSystem.stop();
     }
 
     // Called when another command which requires one or more of the same
