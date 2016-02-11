@@ -56,6 +56,35 @@ public class OI {
 	{
 		return driveStick2;
 	}
+	
+	/**
+	 * Joystick deadband function that behaves consistently with positive and
+	 * negative inputs Uses the curve f(x) = x ^ (1/x) Type this into Google
+	 * Search to graph it: graph x^(1/x) Returns zero for values less than about
+	 * 0.25, then scales up to return 1 for an input of 1
+	 */
+	public static double deadBand(double x)
+	{
+		if (x > 0)
+			return Math.pow(x, 1.0 / x);
+		else if (x < 0)
+			return -deadBand(-x);
+		else
+			return 0;
+	}
 
+	/** 
+	 * Translate throttle value from joystick (range -1..+1) into motor speed (range 0..+1)
+	 * The joystick value in the top position is -1, opposite of what might be expected,
+	 * so multiply by negative one to invert the readings.
+	 */
+	public static double throttleSpeed(Joystick stick)
+	{
+		final double min = 0.125;
+		double throttle = (-stick.getThrottle() + 1) / 2;
+		if(throttle < min)
+			throttle = min;
+//		SmartDashboard.putNumber("Throttle Speed Value", throttle);
+		return throttle;
+	}
 }
-

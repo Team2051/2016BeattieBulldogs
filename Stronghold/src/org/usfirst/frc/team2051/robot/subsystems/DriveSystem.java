@@ -1,12 +1,13 @@
 package org.usfirst.frc.team2051.robot.subsystems;
 
+import org.usfirst.frc.team2051.robot.OI;
 import org.usfirst.frc.team2051.robot.RobotMap;
 import org.usfirst.frc.team2051.robot.commands.DriveByJoystick;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -17,13 +18,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */    
 public class DriveSystem extends Subsystem 
 {	
-	private CANTalon driveLeftA;
-	private CANTalon driveLeftB;
-	private CANTalon driveLeftC;
+	private Talon driveLeftA;
+	private Talon driveLeftB;
 
-	private CANTalon driveRightA;
-	private CANTalon driveRightB;
-	private CANTalon driveRightC;
+	private Talon driveRightA;
+	private Talon driveRightB;
 
 	private Accelerometer tiltCont;
 
@@ -38,19 +37,15 @@ public class DriveSystem extends Subsystem
 
 	public DriveSystem() 
 	{
-		driveLeftA = new CANTalon(RobotMap.DRIVE_LEFT_A_CAN_ID);
+		driveLeftA = new Talon(RobotMap.DRIVE_LEFT_A_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Left A", driveLeftA);
-		driveLeftB = new CANTalon(RobotMap.DRIVE_LEFT_B_CAN_ID);
+		driveLeftB = new Talon(RobotMap.DRIVE_LEFT_B_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Left B", driveLeftB);
-		driveLeftC = new CANTalon(RobotMap.DRIVE_LEFT_C_CAN_ID);
-		LiveWindow.addActuator("Drive System", "Drive Left C", driveLeftC);
 
-		driveRightA = new CANTalon(RobotMap.DRIVE_RIGHT_A_CAN_ID);
+		driveRightA = new Talon(RobotMap.DRIVE_RIGHT_A_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Right A", driveRightA);
-		driveRightB = new CANTalon(RobotMap.DRIVE_RIGHT_B_CAN_ID);
+		driveRightB = new Talon(RobotMap.DRIVE_RIGHT_B_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Right B", driveRightB);
-		driveRightC = new CANTalon(RobotMap.DRIVE_RIGHT_C_CAN_ID);
-		LiveWindow.addActuator("Drive System", "Drive Right C", driveRightC);
 
 		//Accelerometer Tilt control
 		tiltCont = new BuiltInAccelerometer(Accelerometer.Range.k4G);
@@ -59,19 +54,11 @@ public class DriveSystem extends Subsystem
 		// On each side, all three drive motors MUST run at the same speed.
 		// Use the CAN Talon Follower mode to set the speed of B and C,
 		// making always run at the same speed as A.
-		driveLeftB.changeControlMode(CANTalon.TalonControlMode.Follower);
-		driveLeftC.changeControlMode(CANTalon.TalonControlMode.Follower);
-		driveRightB.changeControlMode(CANTalon.TalonControlMode.Follower);
-		driveRightC.changeControlMode(CANTalon.TalonControlMode.Follower);
-		driveLeftB.set(driveLeftA.getDeviceID());
-		driveLeftC.set(driveLeftA.getDeviceID());
-		driveRightB.set(driveRightA.getDeviceID());
-		driveRightC.set(driveRightA.getDeviceID());
+		//driveLeftB.changeControlMode(CANTalon.TalonControlMode.Follower);
+		//driveLeftB.set(driveLeftA.getDeviceID());
 
-		// Define a robot drive object in terms of only the A motors.
-		// The B and C motors will play along at the same speed (see above.)
-		robotDrive = new RobotDrive(driveLeftA, driveRightA);
-
+		robotDrive = new RobotDrive(driveLeftA, driveLeftB, driveRightA, driveRightB);
+		
 		// Set some safety controls for the drive system
 		robotDrive.setSafetyEnabled(true);
 		robotDrive.setExpiration(0.1);
@@ -92,7 +79,7 @@ public class DriveSystem extends Subsystem
 
 	public void takeJoystickInputs(Joystick joystk) 
 	{
-		robotDrive.arcadeDrive(joystk);
+		robotDrive.arcadeDrive(OI.throttleSpeed(joystk) * OI.deadBand(joystk.getY()), OI.throttleSpeed(joystk) * OI.deadBand(joystk.getX()));
 		SmartDashboard.putNumber("accel.x", tiltCont.getX());
 		SmartDashboard.putNumber("accel.y", tiltCont.getY());
 		SmartDashboard.putNumber("accel.z", tiltCont.getZ());
@@ -133,7 +120,11 @@ public class DriveSystem extends Subsystem
 	
 	public boolean isTiltedOnRamp()
 	{
-		//returns g force
 		return getTiltAvg() >= .15;
+	}
+	
+	public boolean isLevel()
+	{
+		return getTiltAvg() >= -0.05 && getTiltAvg() <= 0.05;
 	}
 }
