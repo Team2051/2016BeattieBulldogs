@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,11 +19,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */    
 public class DriveSystem extends Subsystem 
 {	
-	private Talon driveLeftA;
-	private Talon driveLeftB;
+	private Victor driveLeftA;
+	private Victor driveLeftB;
 
-	private Talon driveRightA;
-	private Talon driveRightB;
+	private Victor driveRightA;
+	private Victor driveRightB;
 
 	private Accelerometer tiltCont;
 
@@ -37,14 +38,14 @@ public class DriveSystem extends Subsystem
 
 	public DriveSystem() 
 	{
-		driveLeftA = new Talon(RobotMap.DRIVE_LEFT_A_PORT);
+		driveLeftA = new Victor(RobotMap.DRIVE_LEFT_A_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Left A", driveLeftA);
-		driveLeftB = new Talon(RobotMap.DRIVE_LEFT_B_PORT);
+		driveLeftB = new Victor(RobotMap.DRIVE_LEFT_B_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Left B", driveLeftB);
 
-		driveRightA = new Talon(RobotMap.DRIVE_RIGHT_A_PORT);
+		driveRightA = new Victor(RobotMap.DRIVE_RIGHT_A_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Right A", driveRightA);
-		driveRightB = new Talon(RobotMap.DRIVE_RIGHT_B_PORT);
+		driveRightB = new Victor(RobotMap.DRIVE_RIGHT_B_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Right B", driveRightB);
 
 		//Accelerometer Tilt control

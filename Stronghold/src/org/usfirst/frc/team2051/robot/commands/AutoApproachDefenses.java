@@ -41,7 +41,10 @@ public class AutoApproachDefenses extends Command
     protected boolean isFinished() 
     {
     	if(getTime(clock) <.5)
+    	{
+    		Robot.driveSystem.tiltArrayPop();
     		return false;
+    	}
     	else if(getTime(clock) > 1)
     		return true;
     	else
