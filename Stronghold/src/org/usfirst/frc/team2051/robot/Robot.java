@@ -1,14 +1,13 @@
 
 package org.usfirst.frc.team2051.robot;
 
+import org.usfirst.frc.team2051.robot.commands.*;
+import org.usfirst.frc.team2051.robot.subsystems.*;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team2051.robot.commands.ExampleCommand;
-import org.usfirst.frc.team2051.robot.subsystems.ExampleSubsystem;
-import org.usfirst.frc.team2051.robot.commands.DriveByJoystick;
-import org.usfirst.frc.team2051.robot.subsystems.DriveSystem;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -22,7 +21,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot 
 {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final DriveSystem driveSystem = new DriveSystem();
 	public static OI oi;
 
@@ -37,8 +35,9 @@ public class Robot extends IterativeRobot
     {
 		oi = new OI();
         chooser = new SendableChooser();
-        chooser.addDefault("Default Auto", new ExampleCommand());
-//        chooser.addObject("My Auto", new MyAutoCommand());
+        chooser.addDefault("Approach Defense", new AutoApproachDefenses());
+        chooser.addObject("Breach Defense", new AutoBreachDefenses());
+        
         SmartDashboard.putData("Auto mode", chooser);
         SmartDashboard.putData(new DriveByJoystick());
     }
@@ -70,18 +69,7 @@ public class Robot extends IterativeRobot
     public void autonomousInit() 
     {
         autonomousCommand = (Command) chooser.getSelected();
-        
-		/* String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
-		switch(autoSelected) {
-		case "My Auto":
-			autonomousCommand = new MyAutoCommand();
-			break;
-		case "Default Auto":
-		default:
-			autonomousCommand = new ExampleCommand();
-			break;
-		} */
-    	
+            	
     	// schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
     }

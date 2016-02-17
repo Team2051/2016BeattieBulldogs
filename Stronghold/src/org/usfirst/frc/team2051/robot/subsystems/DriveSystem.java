@@ -7,8 +7,7 @@ import org.usfirst.frc.team2051.robot.commands.DriveByJoystick;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,12 +17,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  */    
 public class DriveSystem extends Subsystem 
-{	
-	private Victor driveLeftA;
-	private Victor driveLeftB;
+{
+	private VictorSP driveLeftA;
+	private VictorSP driveLeftB;
 
-	private Victor driveRightA;
-	private Victor driveRightB;
+	private VictorSP driveRightA;
+	private VictorSP driveRightB;
 
 	private Accelerometer tiltCont;
 
@@ -32,20 +31,20 @@ public class DriveSystem extends Subsystem
 	double encOffsetValue = 0;
 
 	int maxArrayIndex = 24;
-	public double tiltArray[] = new double[maxArrayIndex + 1];
-	
-	public int i = 0;
+	private double tiltArray[] = new double[maxArrayIndex + 1];
+
+	private int i = 0;
 
 	public DriveSystem() 
 	{
-		driveLeftA = new Victor(RobotMap.DRIVE_LEFT_A_PORT);
+		driveLeftA = new VictorSP(RobotMap.DRIVE_LEFT_A_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Left A", driveLeftA);
-		driveLeftB = new Victor(RobotMap.DRIVE_LEFT_B_PORT);
+		driveLeftB = new VictorSP(RobotMap.DRIVE_LEFT_B_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Left B", driveLeftB);
 
-		driveRightA = new Victor(RobotMap.DRIVE_RIGHT_A_PORT);
+		driveRightA = new VictorSP(RobotMap.DRIVE_RIGHT_A_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Right A", driveRightA);
-		driveRightB = new Victor(RobotMap.DRIVE_RIGHT_B_PORT);
+		driveRightB = new VictorSP(RobotMap.DRIVE_RIGHT_B_PORT);
 		LiveWindow.addActuator("Drive System", "Drive Right B", driveRightB);
 
 		//Accelerometer Tilt control
@@ -65,8 +64,8 @@ public class DriveSystem extends Subsystem
 		robotDrive.setExpiration(0.1);
 		robotDrive.setSensitivity(0.5);
 		robotDrive.setMaxOutput(1.0);
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true); 
-		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+//		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true); 
+//		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 	}
 
 	public void initDefaultCommand() 

@@ -35,6 +35,7 @@ public class AutoBreachDefenses extends Command
     	double speed = 1;
     	Robot.driveSystem.forward(speed);
     	clock += 1;
+    	Robot.driveSystem.tiltArrayPop();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +43,6 @@ public class AutoBreachDefenses extends Command
     {
     	if(getTime(clock) <.5)
     	{
-    		Robot.driveSystem.tiltArrayPop();
     		return false;
     	}
     	else if(getTime(clock) > 1)
