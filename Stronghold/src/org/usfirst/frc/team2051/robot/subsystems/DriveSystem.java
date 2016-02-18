@@ -33,7 +33,7 @@ public class DriveSystem extends Subsystem
 	int maxArrayIndex = 24;
 	private double tiltArray[] = new double[maxArrayIndex + 1];
 
-	private int i = 0;
+	int i = 0;
 
 	public DriveSystem() 
 	{
@@ -64,8 +64,8 @@ public class DriveSystem extends Subsystem
 		robotDrive.setExpiration(0.1);
 		robotDrive.setSensitivity(0.5);
 		robotDrive.setMaxOutput(1.0);
-//		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true); 
-//		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		robotDrive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true); 
+		robotDrive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
 	}
 
 	public void initDefaultCommand() 
