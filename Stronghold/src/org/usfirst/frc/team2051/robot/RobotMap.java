@@ -17,6 +17,11 @@ public class RobotMap
 	public static final int DRIVE_RIGHT_A_PORT = 2;
 	public static final int DRIVE_RIGHT_B_PORT = 3;
 	
+	public static final int INTAKE_PORT = 4;
+	
+	public static final int ARM_CAN_ID = 1;
+	public static final int SHOOTER_CAN_ID = 2;
+	
     // If you are using multiple modules, make sure to define both the port
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
