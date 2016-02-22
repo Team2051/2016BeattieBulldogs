@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2051.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2051.robot.commands.*;
@@ -9,7 +10,8 @@ import org.usfirst.frc.team2051.robot.commands.*;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+public class OI 
+{
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
@@ -38,12 +40,38 @@ public class OI {
     // button.whenReleased(new ExampleCommand());
 	
 	public Joystick driveStick;
-	public Joystick driveStick2;
-
+	public Joystick shooterStick;
+	
+	public JoystickButton autoApproachBtn;
+	public JoystickButton autoBreachBtn;
+	
+	public JoystickButton intakeBtn;
+	public JoystickButton shootLowBtn;
+	public JoystickButton shootHighBtn;
+	
 	public OI() 
 	{
 		driveStick = new Joystick(0);
-		driveStick2 = new Joystick(1);
+		shooterStick = new Joystick(1);
+		
+		//Driver Joystick Controls
+		autoApproachBtn = new JoystickButton(driveStick, 3);
+		autoApproachBtn.whenPressed(new AutoApproachDefenses());
+		
+		autoBreachBtn = new JoystickButton(driveStick, 4);
+		autoBreachBtn.whenPressed(new AutoBreachDefenses());
+		
+		
+		//Shooter Joystick Controls
+		intakeBtn = new JoystickButton(shooterStick, 1);
+		intakeBtn.whileHeld(new IntakeBall());
+		
+		shootLowBtn = new JoystickButton(shooterStick, 2);
+		shootLowBtn.whileHeld(new ShootLow());
+		
+		shootHighBtn = new JoystickButton(shooterStick, 3);
+		shootHighBtn.whileHeld(new ShootHigh());
+		
 		SmartDashboard.putData("AutoApproach", new AutoApproachDefenses());
 	}
 	
@@ -52,9 +80,9 @@ public class OI {
 		return driveStick;
 	}
 	
-	public Joystick getDriveStick2()
+	public Joystick getShooterStick()
 	{
-		return driveStick2;
+		return shooterStick;
 	}
 	
 	/**

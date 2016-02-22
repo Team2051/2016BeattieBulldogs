@@ -21,8 +21,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot 
 {
 
-	public static final DriveSystem driveSystem = new DriveSystem();
+	public static DriveSystem driveSystem = new DriveSystem();
 	public static OI oi;
+	public static Intake intake;
+	public static Shooter shooter;
+	public static Arm arm;
 
     Command autonomousCommand;
     SendableChooser chooser;
