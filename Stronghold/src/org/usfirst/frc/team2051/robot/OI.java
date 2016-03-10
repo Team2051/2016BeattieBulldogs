@@ -48,6 +48,8 @@ public class OI
 	public JoystickButton intakeBtn;
 	public JoystickButton shootLowBtn;
 	public JoystickButton shootHighBtn;
+	public JoystickButton openRampBtn;
+	public JoystickButton closeRampBtn;
 	
 	public OI() 
 	{
@@ -71,6 +73,12 @@ public class OI
 		
 		shootHighBtn = new JoystickButton(shooterStick, 3);
 		shootHighBtn.whileHeld(new ShootHigh());
+		
+		openRampBtn = new JoystickButton(shooterStick, 4);
+		openRampBtn.whenPressed(new OpenRamp());
+		
+		closeRampBtn = new JoystickButton(shooterStick, 5);
+		closeRampBtn.whenPressed(new CloseRamp());
 		
 		SmartDashboard.putData("AutoApproach", new AutoApproachDefenses());
 	}
