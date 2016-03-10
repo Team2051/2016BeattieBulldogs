@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem 
 {
 	private Relay motor;
-	private int solenoidStatus = 0;
-    private DoubleSolenoid intakeRamp = RobotMap.intakeRamp;
+//	int solenoidStatus = 0;
+//  private DoubleSolenoid intakeRamp = RobotMap.intakeRamp;
 
     
     // Put methods for controlling this subsystem
@@ -22,7 +22,7 @@ public class Intake extends Subsystem
 	public Intake()
 	{
 		motor = new Relay(RobotMap.INTAKE_PORT);
-		intakeRamp = new DoubleSolenoid(0, 0, 1);
+//		intakeRamp = new DoubleSolenoid(0, 0, 1);
 	}
 
 	public void initDefaultCommand() 
@@ -39,35 +39,34 @@ public class Intake extends Subsystem
     public void release()
     {
     	motor.set(Relay.Value.kForward);
-    	if(solenoidStatus == 1)
-    	{
-    		intakeRamp.set(DoubleSolenoid.Value.kReverse);
-    		solenoidStatus = 0;
-    	}
+//    	if(solenoidStatus == 1)
+//    	{
+//    		intakeRamp.set(DoubleSolenoid.Value.kReverse);
+//    		solenoidStatus = 0;
+//    	}
     }
     
     public void stop()
     {
     	motor.set(Relay.Value.kOff);
-    	intakeRamp.set(DoubleSolenoid.Value.kOff);
+//    	intakeRamp.set(DoubleSolenoid.Value.kOff);
     }
     
     public void openRamp()
     {
-    	if(solenoidStatus == 0)
-    	{
-    		intakeRamp.set(DoubleSolenoid.Value.kForward);
-    		solenoidStatus = 1;
-    	}
+//    	if(solenoidStatus == 0)
+//    	{
+//    		intakeRamp.set(DoubleSolenoid.Value.kForward);
+//    		solenoidStatus = 1;
+//    	}
     }
     
     public void closeRamp()
     {
-    	if(solenoidStatus == 0)
-    	{
-    		intakeRamp.set(DoubleSolenoid.Value.kReverse);
-    		solenoidStatus = 1;
-    	}
+//    	if(solenoidStatus == 0)
+//    	{
+//    		intakeRamp.set(DoubleSolenoid.Value.kReverse);
+//    		solenoidStatus = 1;
+//    	}
     }
-
 }
