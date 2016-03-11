@@ -49,8 +49,9 @@ public class Robot extends IterativeRobot
         oi = new OI();
         
         chooser = new SendableChooser();
-        chooser.addDefault("Approach Defense", new AutoApproachDefenses());
+        chooser.addDefault("Approach and Breach Defense", new AutonBreach());
         chooser.addObject("Breach Defense", new AutoBreachDefenses());
+        chooser.addObject("Approach Defense", new AutoApproachDefenses());
         
         SmartDashboard.putData("Auto mode", chooser);
         SmartDashboard.putData(new DriveByJoystick());		
