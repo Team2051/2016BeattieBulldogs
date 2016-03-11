@@ -1,3 +1,5 @@
+
+
 package org.usfirst.frc.team2051.robot.subsystems;
 
 import org.usfirst.frc.team2051.robot.RobotMap;
@@ -48,13 +50,13 @@ public class Arm extends Subsystem
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void rotateAway() // rotate the arm away from the driver's POV
+    public void rotateAway() // rotate the arm away from the electronic's board
     {
     	motor.changeControlMode(TalonControlMode.PercentVbus);
     	motor.set(1);
     }
     
-    public void rotateTowards() // rotate the arm towards from the driver's POV
+    public void rotateTowards() // rotate the arm towards from the electronic's board
     {
     	motor.changeControlMode(TalonControlMode.PercentVbus);
     	motor.set(-1);
@@ -64,12 +66,6 @@ public class Arm extends Subsystem
     {
     	motor.changeControlMode(TalonControlMode.PercentVbus);
     	motor.set(0);
-    }
-
-    public void grabBall()
-    {
-    	motor.changeControlMode(TalonControlMode.Position);
-    	motor.set(.5);
     }
     
     public void back()
@@ -83,5 +79,15 @@ public class Arm extends Subsystem
     	motor.changeControlMode(TalonControlMode.Position);
     	motor.set(.33);
     }
-
+    
+    public void down()
+    {
+    	motor.changeControlMode(TalonControlMode.Position);
+    	motor.set(.8);
+    }
+    
+    public double getPosition()
+    {
+    	return motor.getPosition();
+    }
 }

@@ -45,7 +45,7 @@ public class AutoBreachDefenses extends Command
     	{
     		return false;
     	}
-    	else if(getTime(clock) > 1)
+    	else if(getTime(clock) > 1.5)
     		return true;
     	else
     		return Robot.driveSystem.isLevel();

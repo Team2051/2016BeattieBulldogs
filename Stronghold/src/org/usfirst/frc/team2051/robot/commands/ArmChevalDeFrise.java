@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *Rotate the arm towards the electronics board
  */
-public class ArmUp extends Command 
+public class ArmChevalDeFrise extends Command 
 {
 
-    public ArmUp() 
+    public ArmChevalDeFrise() 
     {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -26,13 +26,14 @@ public class ArmUp extends Command
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	Robot.arm.back();
+    	Robot.arm.teeterTotter();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() 
     {
-        return false;
+    	return false;
+//        return Robot.arm.getPosition();
     }
 
     // Called once after isFinished returns true
