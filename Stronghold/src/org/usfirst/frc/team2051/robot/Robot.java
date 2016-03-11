@@ -25,6 +25,7 @@ public class Robot extends IterativeRobot
 	public static Intake intake;
 	public static Shooter shooter;
 	public static Arm arm;
+	public static Compressor compressor;
 	//OI Always Goes Last OIAGL
 	public static OI oi;
 
@@ -40,13 +41,14 @@ public class Robot extends IterativeRobot
     	driveSystem = new DriveSystem();
     	intake = new Intake();
         shooter = new Shooter();
-        arm = new Arm();
+        arm = new Arm();        
+        compressor = new Compressor();
+        compressor.setClosedLoopControl(true);
+
         //OI Always Goes Last OIAGL
         oi = new OI();
         
         chooser = new SendableChooser();
-        Compressor compressor = new Compressor();
-        compressor.setClosedLoopControl(true);
         chooser.addDefault("Approach Defense", new AutoApproachDefenses());
         chooser.addObject("Breach Defense", new AutoBreachDefenses());
         

@@ -21,7 +21,7 @@ public class Intake extends Subsystem
 
 	public Intake()
 	{
-		motor = new CANTalon(RobotMap.INTAKE_PORT);
+		motor = new CANTalon(RobotMap.INTAKE_CAN_ID);
 		intakeRamp = new DoubleSolenoid(0, 0, 1);
 	}
 
@@ -54,19 +54,19 @@ public class Intake extends Subsystem
     
     public void openRamp()
     {
-    	if(solenoidStatus == 0)
-    	{
+//    	if(solenoidStatus == 0)
+//    	{
     		intakeRamp.set(DoubleSolenoid.Value.kForward);
     		solenoidStatus = 1;
-    	}
+//    	}
     }
     
     public void closeRamp()
     {
-    	if(solenoidStatus == 0)
-    	{
+//    	if(solenoidStatus == 0)
+//    	{
     		intakeRamp.set(DoubleSolenoid.Value.kReverse);
     		solenoidStatus = 1;
-    	}
+//    	}
     }
 }
