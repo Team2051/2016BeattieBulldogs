@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot
     public void robotInit() 
     {
     	driveSystem = new DriveSystem();
-        intake = new Intake();
+    	intake = new Intake();
         shooter = new Shooter();
         arm = new Arm();
         //OI Always Goes Last OIAGL
