@@ -32,7 +32,7 @@ public class AutoApproachDefenses extends Command
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	double speed = 0.5;
+    	double speed = 0.8;
     	Robot.driveSystem.forward(speed);
     	clock += 1;
     	Robot.driveSystem.tiltArrayPop();
@@ -41,14 +41,12 @@ public class AutoApproachDefenses extends Command
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() 
     {
-    	if(getTime(clock) <1)
-    	{
+    	if(getTime(clock) < 1)
     		return false;
-    	}
-    	else if(getTime(clock) > 10)
-    		return true;
     	else
-    		return Robot.driveSystem.isTiltedOnRamp();
+    		return true;
+//    	else
+//    		return Robot.driveSystem.isTiltedOnRamp();
     }
     
     // Called once after isFinished returns true

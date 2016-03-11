@@ -30,7 +30,7 @@ public class DriveSystem extends Subsystem
 
 	double encOffsetValue = 0;
 
-	int maxArrayIndex = 24;
+	int maxArrayIndex = 49;
 	private double tiltArray[] = new double[maxArrayIndex + 1];
 
 	int i = 0;

@@ -51,6 +51,11 @@ public class OI
 	public JoystickButton shootHighBtn;
 	public JoystickButton openRampBtn;
 	public JoystickButton closeRampBtn;
+	public JoystickButton armUpBtn;
+	public JoystickButton armDownBtn;
+	public JoystickButton armChevalDeFriseBtn;
+	public JoystickButton armPosBtn;
+
 	
 	public OI() 
 	{
@@ -83,6 +88,15 @@ public class OI
 		
 		closeRampBtn = new JoystickButton(shooterStick, 5);
 		closeRampBtn.whenPressed(new CloseRamp());
+		
+		armUpBtn = new JoystickButton(shooterStick, 6);
+		armUpBtn.whenPressed(new ArmUp());
+		
+		armDownBtn = new JoystickButton(shooterStick, 7);
+		armDownBtn.whenPressed(new ArmDown());
+
+		armChevalDeFriseBtn = new JoystickButton(shooterStick, 10);
+		armChevalDeFriseBtn.whenPressed(new ArmChevalDeFrise());
 		
 		SmartDashboard.putData("AutoApproach", new AutoApproachDefenses());
 	}
@@ -122,6 +136,16 @@ public class OI
 	{
 		final double min = 0.125;
 		double throttle = (-stick.getThrottle() + 1) / 2;
+		if(throttle < min)
+			throttle = min;
+//		SmartDashboard.putNumber("Throttle Speed Value", throttle);
+		return throttle;
+	}
+	
+	public static double throttleArmSpeed(Joystick stick)
+	{
+		final double min = 0.125;
+		double throttle = (-stick.getZ() + 1) / 2;
 		if(throttle < min)
 			throttle = min;
 //		SmartDashboard.putNumber("Throttle Speed Value", throttle);

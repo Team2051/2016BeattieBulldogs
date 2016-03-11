@@ -41,14 +41,12 @@ public class AutoBreachDefenses extends Command
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() 
     {
-    	if(getTime(clock) <.5)
-    	{
+    	if(getTime(clock) < 2)
     		return false;
-    	}
-    	else if(getTime(clock) > 1.5)
-    		return true;
     	else
-    		return Robot.driveSystem.isLevel();
+    		return true;
+    	//else
+    		//return Robot.driveSystem.isLevel();
     }
     
     // Called once after isFinished returns true

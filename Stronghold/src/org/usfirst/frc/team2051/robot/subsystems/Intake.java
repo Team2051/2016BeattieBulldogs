@@ -33,12 +33,12 @@ public class Intake extends Subsystem
     
     public void intake()
     {
-    	motor.set(-1);
+    	motor.set(1);
     }
     
     public void release()
     {
-    	motor.set(1);
+    	motor.set(-1);
 //    	if(solenoidStatus == 1)
 //    	{
 //    		intakeRamp.set(DoubleSolenoid.Value.kReverse);

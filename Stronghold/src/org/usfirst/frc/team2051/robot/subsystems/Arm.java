@@ -2,12 +2,16 @@
 
 package org.usfirst.frc.team2051.robot.subsystems;
 
+import org.usfirst.frc.team2051.robot.OI;
 import org.usfirst.frc.team2051.robot.RobotMap;
+import org.usfirst.frc.team2051.robot.commands.ArmByJoystick;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
 import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -48,6 +52,7 @@ public class Arm extends Subsystem
     {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	setDefaultCommand(new ArmByJoystick());
     }
     
     public void rotateAway() // rotate the arm away from the electronic's board
@@ -77,17 +82,29 @@ public class Arm extends Subsystem
     public void teeterTotter()
     {
     	motor.changeControlMode(TalonControlMode.Position);
-    	motor.set(.33);
+    	motor.set(-.33);
     }
     
     public void down()
     {
     	motor.changeControlMode(TalonControlMode.Position);
-    	motor.set(.8);
+    	motor.set(-.5);
     }
     
     public double getPosition()
     {
     	return motor.getPosition();
+    }
+    
+    public void showPosition()
+    {
+    	SmartDashboard.putNumber("Arm Position", getPosition());
+    	SmartDashboard.putNumber("Arm Target Position", motor.getSetpoint());
+    }
+    
+    public void takeJoystickInputs(Joystick joystk)
+    {
+    	motor.changeControlMode(TalonControlMode.PercentVbus);
+    	motor.set(OI.throttleArmSpeed(joystk) * OI.deadBand(joystk.getY()));
     }
 }
