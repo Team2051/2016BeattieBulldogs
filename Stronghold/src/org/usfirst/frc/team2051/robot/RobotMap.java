@@ -15,16 +15,16 @@ public class RobotMap
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
     // public static int rightMotor = 2;
-	public static final int DRIVE_LEFT_A_PORT = 0;
-	public static final int DRIVE_LEFT_B_PORT = 1;
+	public static final int DRIVE_LEFT_A_PORT = 2;
+	public static final int DRIVE_LEFT_B_PORT = 3;
 
-	public static final int DRIVE_RIGHT_A_PORT = 2;
-	public static final int DRIVE_RIGHT_B_PORT = 3;
-	public static final int SHOOTER_PORT = 4;
-
-	public static final int INTAKE_CAN_ID = 0;
+	public static final int DRIVE_RIGHT_A_PORT = 0;
+	public static final int DRIVE_RIGHT_B_PORT = 1;
+	
+	public static final int INTAKE_PORT = 4;
 	
 	public static final int ARM_CAN_ID = 1;
+	public static final int SHOOTER_CAN_ID = 2;
 	
 	public static Compressor compressor;
     public static DoubleSolenoid intakeRamp;

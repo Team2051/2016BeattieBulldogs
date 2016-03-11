@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot 
 {
-	public static DriveSystem driveSystem;
+
 	public static Intake intake;
 	public static Shooter shooter;
 	public static Arm arm;
