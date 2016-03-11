@@ -32,7 +32,7 @@ public class AutoApproachDefenses extends Command
     // Called repeatedly when this Command is scheduled to run
     protected void execute() 
     {
-    	double speed = - 0.5;
+    	double speed = 0.5;
     	Robot.driveSystem.forward(speed);
     	clock += 1;
     	Robot.driveSystem.tiltArrayPop();
