@@ -62,7 +62,7 @@ public class DriveSystem extends Subsystem
 		robotDrive = new RobotDrive(driveLeftA, driveLeftB, driveRightA, driveRightB);
 		
 		// Set some safety controls for the drive system
-		robotDrive.setSafetyEnabled(true);
+		robotDrive.setSafetyEnabled(false);
 		robotDrive.setExpiration(0.1);
 		robotDrive.setSensitivity(0.5);
 		robotDrive.setMaxOutput(1.0);

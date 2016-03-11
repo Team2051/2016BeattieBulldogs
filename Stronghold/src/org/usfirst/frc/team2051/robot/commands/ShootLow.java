@@ -14,6 +14,8 @@ public class ShootLow extends Command
 	{
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
+		requires(Robot.intake);
+		requires(Robot.shooter);
 	}
 
 	// Called just before this Command runs the first time
@@ -25,6 +27,7 @@ public class ShootLow extends Command
 	protected void execute()
 	{
 		Robot.intake.release();
+		Robot.shooter.shoot();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
