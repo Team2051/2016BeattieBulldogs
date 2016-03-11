@@ -42,6 +42,7 @@ public class OI
 	public Joystick driveStick;
 	public Joystick shooterStick;
 	
+	public JoystickButton invertBtn;
 	public JoystickButton autoApproachBtn;
 	public JoystickButton autoBreachBtn;
 	
@@ -57,6 +58,9 @@ public class OI
 		shooterStick = new Joystick(1);
 		
 		//Driver Joystick Controls
+		invertBtn = new JoystickButton(driveStick, 1);
+		invertBtn.whenPressed(new InvertJoystick());
+		
 		autoApproachBtn = new JoystickButton(driveStick, 3);
 		autoApproachBtn.whenPressed(new AutoApproachDefenses());
 		

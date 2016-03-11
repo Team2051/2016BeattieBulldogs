@@ -34,6 +34,8 @@ public class DriveSystem extends Subsystem
 	private double tiltArray[] = new double[maxArrayIndex + 1];
 
 	int i = 0;
+	
+	int invert = 0;
 
 	public DriveSystem() 
 	{
@@ -77,11 +79,22 @@ public class DriveSystem extends Subsystem
 
 	public void takeJoystickInputs(Joystick joystk) 
 	{
-		robotDrive.arcadeDrive(OI.throttleSpeed(joystk) * OI.deadBand(joystk.getY()), OI.throttleSpeed(joystk) * OI.deadBand(joystk.getX()));
-		SmartDashboard.putNumber("accel.x", tiltCont.getX());
-		SmartDashboard.putNumber("accel.y", tiltCont.getY());
-		SmartDashboard.putNumber("accel.z", tiltCont.getZ());
-		SmartDashboard.putNumber("avg.x", getTiltAvg());
+		if(invert == 0)
+		{
+			robotDrive.arcadeDrive(OI.throttleSpeed(joystk) * OI.deadBand(joystk.getY()), OI.throttleSpeed(joystk) * OI.deadBand(joystk.getX()));
+			SmartDashboard.putNumber("accel.x", tiltCont.getX());
+			SmartDashboard.putNumber("accel.y", tiltCont.getY());
+			SmartDashboard.putNumber("accel.z", tiltCont.getZ());
+			SmartDashboard.putNumber("avg.x", getTiltAvg());
+		}
+		else
+		{
+			robotDrive.arcadeDrive(OI.throttleSpeed(joystk) * -OI.deadBand(joystk.getY()), OI.throttleSpeed(joystk) * -OI.deadBand(joystk.getX()));
+			SmartDashboard.putNumber("accel.x", tiltCont.getX());
+			SmartDashboard.putNumber("accel.y", tiltCont.getY());
+			SmartDashboard.putNumber("accel.z", tiltCont.getZ());
+			SmartDashboard.putNumber("avg.x", getTiltAvg());
+		}
 	}
 
 	public void forward(double speed) 
@@ -124,5 +137,13 @@ public class DriveSystem extends Subsystem
 	public boolean isLevel()
 	{
 		return getTiltAvg() >= -0.05 && getTiltAvg() <= 0.05;
+	}
+	
+	public void invertJoystick()
+	{
+		if(invert == 0)
+			invert = 1;
+		else
+			invert = 0;
 	}
 }
