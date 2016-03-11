@@ -21,7 +21,7 @@ public class Intake extends Subsystem
 
 	public Intake()
 	{
-		motor = new CANTalon(RobotMap.INTAKE_CAN_ID);
+		motor = new CANTalon(RobotMap.INTAKE_PORT);
 		intakeRamp = new DoubleSolenoid(0, 0, 1);
 	}
 

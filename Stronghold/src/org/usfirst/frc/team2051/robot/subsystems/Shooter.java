@@ -18,7 +18,7 @@ public class Shooter extends Subsystem
     
     public Shooter()
     {
-    	motor = new Talon(RobotMap.SHOOTER_PORT);
+    	motor = new Talon(RobotMap.SHOOTER_CAN_ID);
     }
 
     public void initDefaultCommand() 
