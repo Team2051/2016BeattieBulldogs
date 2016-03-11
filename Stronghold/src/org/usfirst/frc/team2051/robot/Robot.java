@@ -4,6 +4,7 @@ package org.usfirst.frc.team2051.robot;
 import org.usfirst.frc.team2051.robot.commands.*;
 import org.usfirst.frc.team2051.robot.subsystems.*;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -20,12 +21,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot 
 {
-
-	public static DriveSystem driveSystem = new DriveSystem();
-	public static OI oi;
+	public static DriveSystem driveSystem;
 	public static Intake intake;
 	public static Shooter shooter;
 	public static Arm arm;
+	//OI Always Goes Last OIAGL
+	public static OI oi;
 
     Command autonomousCommand;
     SendableChooser chooser;
@@ -36,13 +37,21 @@ public class Robot extends IterativeRobot
      */
     public void robotInit() 
     {
-		oi = new OI();
+    	driveSystem = new DriveSystem();
+        intake = new Intake();
+        shooter = new Shooter();
+        arm = new Arm();
+        //OI Always Goes Last OIAGL
+        oi = new OI();
+        
         chooser = new SendableChooser();
+        Compressor compressor = new Compressor();
+        compressor.setClosedLoopControl(true);
         chooser.addDefault("Approach Defense", new AutoApproachDefenses());
         chooser.addObject("Breach Defense", new AutoBreachDefenses());
         
         SmartDashboard.putData("Auto mode", chooser);
-        SmartDashboard.putData(new DriveByJoystick());
+        SmartDashboard.putData(new DriveByJoystick());		
     }
 	
 	/**
