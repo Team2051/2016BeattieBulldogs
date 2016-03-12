@@ -63,7 +63,7 @@ public class OI
 		shooterStick = new Joystick(1);
 		
 		//Driver Joystick Controls
-		invertBtn = new JoystickButton(driveStick, 1);
+		invertBtn = new JoystickButton(driveStick, 11);
 		invertBtn.whenPressed(new InvertJoystick());
 		
 		autoApproachBtn = new JoystickButton(driveStick, 3);

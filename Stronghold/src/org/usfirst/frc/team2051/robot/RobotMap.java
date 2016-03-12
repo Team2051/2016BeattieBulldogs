@@ -22,7 +22,6 @@ public class RobotMap
 	public static final int DRIVE_RIGHT_B_PORT = 1;
 	
 	public static final int SHOOTER_PORT = 5;
-
 	
 	public static final int ARM_CAN_ID = 1;
 	public static final int INTAKE_CAN_ID = 2;

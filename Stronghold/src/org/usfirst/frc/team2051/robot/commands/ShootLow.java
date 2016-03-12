@@ -27,7 +27,7 @@ public class ShootLow extends Command
 	protected void execute()
 	{
 		Robot.intake.release();
-		Robot.shooter.shoot();
+//		Robot.shooter.shootLow();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -40,6 +40,7 @@ public class ShootLow extends Command
 	protected void end()
 	{
 		Robot.intake.stop();
+//		Robot.shooter.stop();
 	}
 
 	// Called when another command which requires one or more of the same

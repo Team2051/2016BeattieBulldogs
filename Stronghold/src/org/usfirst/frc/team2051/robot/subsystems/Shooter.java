@@ -3,6 +3,7 @@ package org.usfirst.frc.team2051.robot.subsystems;
 import org.usfirst.frc.team2051.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -10,14 +11,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shooter extends Subsystem 
 {
-    private CANTalon motor;
+    private VictorSP motor;
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
     public Shooter()
     {
-    	motor = new CANTalon(RobotMap.SHOOTER_PORT);
+    	motor = new VictorSP(RobotMap.SHOOTER_PORT);
     }
 
     public void initDefaultCommand() 
@@ -26,9 +27,9 @@ public class Shooter extends Subsystem
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void shoot()
+    public void shootLow()
     {
-    	motor.set(1);
+    	motor.set(-1);
     }
     
     public void stop()
