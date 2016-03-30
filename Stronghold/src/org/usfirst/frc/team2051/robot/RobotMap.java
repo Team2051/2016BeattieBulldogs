@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2051.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
@@ -15,17 +16,25 @@ public class RobotMap
     // following variables to use with your drivetrain subsystem.
     // public static int leftMotor = 1;
     // public static int rightMotor = 2;
-	public static final int DRIVE_LEFT_A_PORT = 2;
-	public static final int DRIVE_LEFT_B_PORT = 3;
 
+	//PWM ports
 	public static final int DRIVE_RIGHT_A_PORT = 0;
 	public static final int DRIVE_RIGHT_B_PORT = 1;
-	
+	public static final int DRIVE_LEFT_A_PORT = 2;
+	public static final int DRIVE_LEFT_B_PORT = 3;
+	//what is in port 4 ???
 	public static final int SHOOTER_PORT = 5;
-	
+	public static final int CAM_PORT = 6;
+		
+	//CAN ports
 	public static final int ARM_CAN_ID = 1;
 	public static final int INTAKE_CAN_ID = 2;
 
+	//DIO ports
+	public static final int CAM_LEFT_LIMIT_PORT = 1;
+	public static final int CAM_RIGHT_LIMIT_PORT = 2;
+
+	//Other Stuff
 	public static Compressor compressor;
     public static DoubleSolenoid intakeRamp;
 	

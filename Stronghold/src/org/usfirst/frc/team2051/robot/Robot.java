@@ -26,6 +26,9 @@ public class Robot extends IterativeRobot
 	public static Shooter shooter;
 	public static Arm arm;
 	public static Compressor compressor;
+	public static CameraMotor camMotor;
+	
+	
 	//OI Always Goes Last OIAGL
 	public static OI oi;
 
@@ -44,7 +47,9 @@ public class Robot extends IterativeRobot
         arm = new Arm();        
         compressor = new Compressor();
         compressor.setClosedLoopControl(true);
+        camMotor = new CameraMotor();
 
+        
         //OI Always Goes Last OIAGL
         oi = new OI();
         
