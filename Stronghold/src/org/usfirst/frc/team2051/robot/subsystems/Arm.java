@@ -20,8 +20,6 @@ public class Arm extends Subsystem
 {
     private CANTalon motor;
     private static final int zero = 0;
-    private int potMin = 0;
-    private int potMax = 1;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     

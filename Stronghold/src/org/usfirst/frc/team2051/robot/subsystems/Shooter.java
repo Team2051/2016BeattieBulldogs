@@ -2,7 +2,6 @@ package org.usfirst.frc.team2051.robot.subsystems;
 
 import org.usfirst.frc.team2051.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 

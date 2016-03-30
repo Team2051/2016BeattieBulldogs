@@ -55,6 +55,8 @@ public class OI
 	public JoystickButton armDownBtn;
 	public JoystickButton armChevalDeFriseBtn;
 	public JoystickButton armPosBtn;
+	public JoystickButton camTurnLeftBtn;
+	public JoystickButton camTurnRightBtn;
 
 	
 	public OI() 
@@ -66,12 +68,11 @@ public class OI
 		invertBtn = new JoystickButton(driveStick, 11);
 		invertBtn.whenPressed(new InvertJoystick());
 		
-		autoApproachBtn = new JoystickButton(driveStick, 3);
-		autoApproachBtn.whenPressed(new AutoApproachDefenses());
+		camTurnLeftBtn = new JoystickButton(driveStick, 3);
+		camTurnLeftBtn.whileHeld(new CamTurnLeft());
 		
-		autoBreachBtn = new JoystickButton(driveStick, 4);
-		autoBreachBtn.whenPressed(new AutoBreachDefenses());
-		
+		camTurnRightBtn = new JoystickButton(driveStick, 4);
+		camTurnRightBtn.whileHeld(new CamTurnRight());
 		
 		//Shooter Joystick Controls
 		intakeBtn = new JoystickButton(shooterStick, 1);
